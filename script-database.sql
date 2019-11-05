@@ -432,9 +432,6 @@ GO
 ALTER TABLE [dbo].[usuario]  WITH CHECK ADD FOREIGN KEY([ubigeo_id])
 REFERENCES [dbo].[ubigeo] ([id])
 GO
-ALTER TABLE [dbo].[usuario]  WITH CHECK ADD FOREIGN KEY([ubigeo_id])
-REFERENCES [dbo].[ubigeo] ([id])
-GO
 /****** Object:  StoredProcedure [dbo].[SP_CrearContrato]    Script Date: 11/5/2019 7:09:19 AM ******/
 SET ANSI_NULLS ON
 GO
