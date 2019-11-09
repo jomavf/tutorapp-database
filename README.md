@@ -6,9 +6,6 @@
 * Reglas de negocio
   * [ ] Reescribir algunas
   * [ ] aumentar la regla de negocio que suspende a los tutores si niegan una solicitud de clase un numero determinado de veces 
-
-* Normalizacion (Prioridad: Baja)
-  * [ ] Mejorar formato (que sea mas lejible)
  
 * Modelo logico
   * [ ] Actualizar foto de modelo lógico
@@ -34,4 +31,11 @@
 
 * [ ] Conclusiones
 * [ ] Recomendaciones
+
+* *PRIORIDAD BAJA*
+
+* [ ] Firmas digitales
+* [ ] Alta disponibilidad
+* Normalizacion (Prioridad: Baja)
+  * [ ] Mejorar formato (que sea mas lejible)
 
