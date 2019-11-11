@@ -1,12 +1,28 @@
 USE [TutorApp]
 GO
-/****** Object:  UserDefinedDataType [dbo].[cel]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  UserDefinedDataType [dbo].[cel]    Script Date: 11/11/2019 12:51:21 PM ******/
 CREATE TYPE [dbo].[cel] FROM [char](9) NULL
 GO
-/****** Object:  UserDefinedDataType [dbo].[dni]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  UserDefinedDataType [dbo].[dni]    Script Date: 11/11/2019 12:51:21 PM ******/
 CREATE TYPE [dbo].[dni] FROM [char](8) NULL
 GO
-/****** Object:  Table [dbo].[comentario]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  Table [dbo].[calificacion]    Script Date: 11/11/2019 12:51:21 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[calificacion](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[calificacion_final] [decimal](6, 2) NULL,
+	[numero_calificaciones] [int] NULL,
+	[servicio_id] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[comentario]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -22,7 +38,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[contrato]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  Table [dbo].[contrato]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -39,13 +55,32 @@ CREATE TABLE [dbo].[contrato](
 	[pago_realizado] [bit] NULL,
 	[fecha_pago_realizado] [datetime] NULL,
 	[confirmacion_tutor] [bit] NULL,
+	[calificacion] [tinyint] NULL,
+	[estado] [bit] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [TutorApp_Contratos]
 ) ON [TutorApp_Contratos]
 GO
-/****** Object:  Table [dbo].[dia]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  Table [dbo].[devolucion]    Script Date: 11/11/2019 12:51:21 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[devolucion](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[monto] [decimal](9, 2) NULL,
+	[fecha_devolucion] [datetime] NULL,
+	[estado] [bit] NULL,
+	[estudiante_id] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[dia]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -62,7 +97,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[especialidad]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  Table [dbo].[especialidad]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -77,7 +112,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[especialidad_tutor]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  Table [dbo].[especialidad_tutor]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -92,7 +127,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[estudiante]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  Table [dbo].[estudiante]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -101,13 +136,16 @@ CREATE TABLE [dbo].[estudiante](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[usuario_id] [int] NULL,
 	[estado] [bit] NULL,
+	[servicios_contratados] [int] NULL,
+	[servicios_contratados_semanales] [tinyint] NULL,
+	[descuento] [decimal](6, 2) NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[horario]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  Table [dbo].[horario]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -121,7 +159,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[mensaje]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  Table [dbo].[mensaje]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -140,7 +178,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [TutorApp_Contratos]
 ) ON [TutorApp_Contratos]
 GO
-/****** Object:  Table [dbo].[pago]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  Table [dbo].[pago]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -157,7 +195,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[preferencia]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  Table [dbo].[preferencia]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -172,7 +210,24 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[servicio]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  Table [dbo].[queja]    Script Date: 11/11/2019 12:51:21 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[queja](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[fecha] [datetime] NULL,
+	[aprobada] [bit] NULL,
+	[descripcion] [varchar](500) NULL,
+	[contrato_id] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[servicio]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -191,7 +246,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tipo_pago]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  Table [dbo].[tipo_pago]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -206,7 +261,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tutor]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  Table [dbo].[tutor]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -217,13 +272,14 @@ CREATE TABLE [dbo].[tutor](
 	[estado] [bit] NULL,
 	[quejas_semanales] [tinyint] NULL,
 	[quejas_totales] [int] NULL,
+	[comision] [decimal](6, 2) NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tutores_baneados]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  Table [dbo].[tutores_baneados]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -239,7 +295,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ubigeo]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  Table [dbo].[ubigeo]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -256,7 +312,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[usuario]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  Table [dbo].[usuario]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -279,15 +335,43 @@ CREATE TABLE [dbo].[usuario](
 	[ubigeo_id] [int] NULL,
 	[preferencia_id] [int] NULL,
 	[estado] [bit] NULL,
+	[fecha_creacion] [datetime] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+ALTER TABLE [dbo].[calificacion] ADD  CONSTRAINT [DF_calificacion_calificacion_final]  DEFAULT ((0)) FOR [calificacion_final]
+GO
+ALTER TABLE [dbo].[calificacion] ADD  CONSTRAINT [DF_calificacion_numero_calificaciones]  DEFAULT ((0)) FOR [numero_calificaciones]
+GO
 ALTER TABLE [dbo].[contrato] ADD  DEFAULT ((0)) FOR [pago_realizado]
 GO
+ALTER TABLE [dbo].[contrato] ADD  DEFAULT (NULL) FOR [calificacion]
+GO
+ALTER TABLE [dbo].[contrato] ADD  DEFAULT ((0)) FOR [estado]
+GO
+ALTER TABLE [dbo].[devolucion] ADD  DEFAULT (getdate()) FOR [fecha_devolucion]
+GO
+ALTER TABLE [dbo].[devolucion] ADD  DEFAULT ((1)) FOR [estado]
+GO
+ALTER TABLE [dbo].[estudiante] ADD  DEFAULT ((0)) FOR [servicios_contratados]
+GO
+ALTER TABLE [dbo].[estudiante] ADD  DEFAULT ((0)) FOR [servicios_contratados_semanales]
+GO
+ALTER TABLE [dbo].[estudiante] ADD  DEFAULT ((0)) FOR [descuento]
+GO
+ALTER TABLE [dbo].[queja] ADD  DEFAULT (getdate()) FOR [fecha]
+GO
+ALTER TABLE [dbo].[tutor] ADD  DEFAULT ((0.15)) FOR [comision]
+GO
 ALTER TABLE [dbo].[tutores_baneados] ADD  DEFAULT ((1)) FOR [estado]
+GO
+ALTER TABLE [dbo].[usuario] ADD  DEFAULT (getdate()) FOR [fecha_creacion]
+GO
+ALTER TABLE [dbo].[calificacion]  WITH CHECK ADD FOREIGN KEY([servicio_id])
+REFERENCES [dbo].[servicio] ([id])
 GO
 ALTER TABLE [dbo].[comentario]  WITH CHECK ADD FOREIGN KEY([contrato_id])
 REFERENCES [dbo].[contrato] ([id])
@@ -297,6 +381,9 @@ REFERENCES [dbo].[estudiante] ([id])
 GO
 ALTER TABLE [dbo].[contrato]  WITH CHECK ADD FOREIGN KEY([servicio_id])
 REFERENCES [dbo].[servicio] ([id])
+GO
+ALTER TABLE [dbo].[devolucion]  WITH CHECK ADD FOREIGN KEY([estudiante_id])
+REFERENCES [dbo].[estudiante] ([id])
 GO
 ALTER TABLE [dbo].[dia]  WITH CHECK ADD FOREIGN KEY([horario_id])
 REFERENCES [dbo].[horario] ([id])
@@ -337,6 +424,9 @@ GO
 ALTER TABLE [dbo].[preferencia]  WITH CHECK ADD FOREIGN KEY([usuario_id])
 REFERENCES [dbo].[usuario] ([id])
 GO
+ALTER TABLE [dbo].[queja]  WITH CHECK ADD FOREIGN KEY([contrato_id])
+REFERENCES [dbo].[contrato] ([id])
+GO
 ALTER TABLE [dbo].[servicio]  WITH CHECK ADD FOREIGN KEY([especialidad_id])
 REFERENCES [dbo].[especialidad] ([id])
 GO
@@ -352,7 +442,30 @@ GO
 ALTER TABLE [dbo].[usuario]  WITH CHECK ADD FOREIGN KEY([ubigeo_id])
 REFERENCES [dbo].[ubigeo] ([id])
 GO
-/****** Object:  StoredProcedure [dbo].[SP_CrearContrato]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  StoredProcedure [dbo].[SP_CambiarEstadoTutor]    Script Date: 11/11/2019 12:51:21 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SP_CambiarEstadoTutor] 
+    @tutor_id int
+AS
+	declare @estado_tutor bit
+	select @estado_tutor = t.estado from tutor t where id = @tutor_id
+	print @tutor_id
+	print @estado_tutor
+	if @estado_tutor = 1
+		begin
+			print 'entre alla'
+			update tutor set estado = 0 where id = @tutor_id
+		end
+	if @estado_tutor = 0
+		begin 
+			print 'entre aqui'
+			update tutor set estado = 1 where id = @tutor_id
+		end
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CrearContrato]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -363,46 +476,37 @@ create procedure [dbo].[SP_CrearContrato]
 as
 insert into contrato (estudiante_id,servicio_id,pago_realizado,fecha_pago_realizado) values (@estudiante_id,@servicio_id,1,GETDATE())
 GO
-/****** Object:  Trigger [dbo].[TR_PagoInsertado]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  StoredProcedure [dbo].[SP_EncontrarMejorTutor]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TRIGGER [dbo].[TR_PagoInsertado]
-on [dbo].[pago] for insert
-as
-set nocount on
-declare @servicio_id int
-declare @estudiante_id int
-select @servicio_id = i.servicio_id, @estudiante_id = i.estudiante_id from inserted i
-exec SP_CrearContrato @servicio_id,@estudiante_id
+CREATE PROCEDURE [dbo].[SP_EncontrarMejorTutor] 
+    @contrato_id int,
+	@antiguo_tutor_especialidad int
+AS
+    declare @calificacion decimal(6,2)
+	select top(1) @calificacion = calificacion_final from servicio s join calificacion c on s.id = c.servicio_id where s.especialidad_id = @antiguo_tutor_especialidad order by c.calificacion_final desc
+	
+	if @calificacion != 0 and @calificacion is not null
+		begin 
+			declare @servicio_a_brindar int
+			select top(1) @servicio_a_brindar = s.id from servicio s join calificacion c on s.id = c.servicio_id where s.especialidad_id = @antiguo_tutor_especialidad order by c.calificacion_final desc 
+			return @servicio_a_brindar 
+		end
+	else 
+		begin 
+			return 0
+		end
+return 0
 GO
-ALTER TABLE [dbo].[pago] ENABLE TRIGGER [TR_PagoInsertado]
-GO
-/****** Object:  Trigger [dbo].[TR_TutorBaneado]    Script Date: 11/5/2019 8:04:10 AM ******/
+/****** Object:  StoredProcedure [dbo].[SP_ReiniciarServiciosContratado]    Script Date: 11/11/2019 12:51:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE trigger [dbo].[TR_TutorBaneado]
-on [dbo].[tutor] for update
-as
-declare @quejas_semanales tinyint
-select @quejas_semanales = quejas_semanales from inserted
-declare @tutor_id int
-select @tutor_id = id from inserted
-if @quejas_semanales = 5
-	begin 
-		insert into tutores_baneados values (@tutor_id,getdate(),1)
-	end
-if @quejas_semanales >= 5
-	begin
-		update tutor set estado = 0 where id = @tutor_id
-	end
-	else
-	begin
-	update tutor set estado = 1 where id = @tutor_id
-	end
-GO
-ALTER TABLE [dbo].[tutor] ENABLE TRIGGER [TR_TutorBaneado]
+CREATE PROCEDURE [dbo].[SP_ReiniciarServiciosContratado] 
+    @estudiante_id int
+AS
+    update estudiante set servicios_contratados_semanales = 0 where id = @estudiante_id
 GO

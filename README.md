@@ -4,8 +4,8 @@
   * [ ] Revisar si todo esta OK 
 
 * Reglas de negocio
-  * [ ] Reescribir algunas
-  * [ ] aumentar la regla de negocio que suspende a los tutores si niegan una solicitud de clase un numero determinado de veces 
+  * [x] Reescribir algunas
+  * [x] aumentar la regla de negocio que suspende a los tutores si niegan una solicitud de clase un numero determinado de veces 
  
 * Modelo logico
   * [ ] Actualizar foto de modelo lógico
@@ -14,10 +14,11 @@
   * [ ] Añadir reglas
 
 * Triggers, store procedures y functions
-  * [ ] Definir en base a reglas de negocio
+  * [x] Definir en base a reglas de negocio
+  * [ ] Definir funciones
 
 * Tablas Particiones
-  * [ ] Añadir mas filegroups para contratos y organizarlos por fecha
+  * [x] Añadir mas filegroups para contratos y organizarlos por fecha
   * [ ] Crear las particiones
 
 * XML 
