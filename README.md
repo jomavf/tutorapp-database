@@ -8,7 +8,7 @@
   * [x] aumentar la regla de negocio que suspende a los tutores si niegan una solicitud de clase un numero determinado de veces 
  
 * Modelo logico
-  * [ ] Actualizar foto de modelo lógico
+  * [x] Actualizar foto de modelo lógico
 
 * Tipo de datos
   * [ ] Añadir reglas
@@ -20,9 +20,10 @@
 * Tablas Particiones
   * [x] Añadir mas filegroups para contratos y organizarlos por fecha
   * [ ] Crear las particiones
+  * [ ] Falta crear indice en la base de datos
 
 * XML 
-  * [ ] Crear reportes de tutores
+  * [x] Crear reportes de tutores
   * [ ] Pensar en alguno mas (opcional)
  
 * Reportes
@@ -38,5 +39,5 @@
 * [ ] Firmas digitales
 * [ ] Alta disponibilidad
 * Normalizacion (Prioridad: Baja)
-  * [ ] Mejorar formato (que sea mas lejible)
+  * [x] Mejorar formato (que sea mas lejible)
 

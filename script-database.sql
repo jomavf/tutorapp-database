@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [TutorApp]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Database [TutorApp]    Script Date: 11/11/2019 11:41:25 PM ******/
 CREATE DATABASE [TutorApp]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -85,13 +85,13 @@ ALTER DATABASE [TutorApp] SET QUERY_STORE = OFF
 GO
 USE [TutorApp]
 GO
-/****** Object:  UserDefinedDataType [dbo].[cel]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  UserDefinedDataType [dbo].[cel]    Script Date: 11/11/2019 11:41:25 PM ******/
 CREATE TYPE [dbo].[cel] FROM [char](9) NULL
 GO
-/****** Object:  UserDefinedDataType [dbo].[dni]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  UserDefinedDataType [dbo].[dni]    Script Date: 11/11/2019 11:41:25 PM ******/
 CREATE TYPE [dbo].[dni] FROM [char](8) NULL
 GO
-/****** Object:  Table [dbo].[calificacion]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[calificacion]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -107,7 +107,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[comentario]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[comentario]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -123,7 +123,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[contrato]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[contrato]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -148,7 +148,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [TutorApp_Contratos]
 ) ON [TutorApp_Contratos]
 GO
-/****** Object:  Table [dbo].[devolucion]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[devolucion]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -165,7 +165,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dia]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[dia]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -182,7 +182,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[especialidad]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[especialidad]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -197,7 +197,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[especialidad_tutor]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[especialidad_tutor]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -212,7 +212,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[estudiante]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[estudiante]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -230,7 +230,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[horario]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[horario]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -244,7 +244,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[mensaje]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[mensaje]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -263,7 +263,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [TutorApp_Contratos]
 ) ON [TutorApp_Contratos]
 GO
-/****** Object:  Table [dbo].[pago]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[pago]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -280,7 +280,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[preferencia]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[preferencia]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -295,7 +295,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[queja]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[queja]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -312,7 +312,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[servicio]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[servicio]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -331,7 +331,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tipo_pago]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[tipo_pago]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -346,7 +346,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tutor]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[tutor]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -364,7 +364,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tutores_baneados]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[tutores_baneados]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -380,7 +380,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ubigeo]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[ubigeo]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -397,7 +397,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[usuario]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Table [dbo].[usuario]    Script Date: 11/11/2019 11:41:25 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -426,6 +426,136 @@ PRIMARY KEY CLUSTERED
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[calificacion] ON 
+GO
+INSERT [dbo].[calificacion] ([id], [calificacion_final], [numero_calificaciones], [servicio_id]) VALUES (1, CAST(4.50 AS Decimal(6, 2)), 2, 1)
+GO
+INSERT [dbo].[calificacion] ([id], [calificacion_final], [numero_calificaciones], [servicio_id]) VALUES (2, CAST(0.00 AS Decimal(6, 2)), 0, 2)
+GO
+INSERT [dbo].[calificacion] ([id], [calificacion_final], [numero_calificaciones], [servicio_id]) VALUES (3, CAST(0.00 AS Decimal(6, 2)), 0, 3)
+GO
+INSERT [dbo].[calificacion] ([id], [calificacion_final], [numero_calificaciones], [servicio_id]) VALUES (4, CAST(0.00 AS Decimal(6, 2)), 0, 4)
+GO
+INSERT [dbo].[calificacion] ([id], [calificacion_final], [numero_calificaciones], [servicio_id]) VALUES (5, CAST(0.00 AS Decimal(6, 2)), 0, 6)
+GO
+SET IDENTITY_INSERT [dbo].[calificacion] OFF
+GO
+SET IDENTITY_INSERT [dbo].[contrato] ON 
+GO
+INSERT [dbo].[contrato] ([id], [fecha_inicio], [fecha_fin], [hora_inicio], [hora_fin], [comision], [estudiante_id], [servicio_id], [pago_realizado], [fecha_pago_realizado], [confirmacion_tutor], [calificacion], [estado]) VALUES (2, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, CAST(N'2019-11-04T17:32:51.050' AS DateTime), 1, 3, 1)
+GO
+INSERT [dbo].[contrato] ([id], [fecha_inicio], [fecha_fin], [hora_inicio], [hora_fin], [comision], [estudiante_id], [servicio_id], [pago_realizado], [fecha_pago_realizado], [confirmacion_tutor], [calificacion], [estado]) VALUES (3, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, CAST(N'2019-11-04T17:35:29.317' AS DateTime), 0, 5, NULL)
+GO
+INSERT [dbo].[contrato] ([id], [fecha_inicio], [fecha_fin], [hora_inicio], [hora_fin], [comision], [estudiante_id], [servicio_id], [pago_realizado], [fecha_pago_realizado], [confirmacion_tutor], [calificacion], [estado]) VALUES (4, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, NULL, 1, 5, 1)
+GO
+INSERT [dbo].[contrato] ([id], [fecha_inicio], [fecha_fin], [hora_inicio], [hora_fin], [comision], [estudiante_id], [servicio_id], [pago_realizado], [fecha_pago_realizado], [confirmacion_tutor], [calificacion], [estado]) VALUES (5, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, NULL, 0, 5, 0)
+GO
+SET IDENTITY_INSERT [dbo].[contrato] OFF
+GO
+SET IDENTITY_INSERT [dbo].[devolucion] ON 
+GO
+INSERT [dbo].[devolucion] ([id], [monto], [fecha_devolucion], [estado], [estudiante_id]) VALUES (1, CAST(12.99 AS Decimal(9, 2)), CAST(N'2019-11-10T22:20:33.953' AS DateTime), 1, NULL)
+GO
+INSERT [dbo].[devolucion] ([id], [monto], [fecha_devolucion], [estado], [estudiante_id]) VALUES (2, CAST(12.99 AS Decimal(9, 2)), CAST(N'2019-11-10T22:23:13.210' AS DateTime), 1, NULL)
+GO
+INSERT [dbo].[devolucion] ([id], [monto], [fecha_devolucion], [estado], [estudiante_id]) VALUES (3, CAST(12.99 AS Decimal(9, 2)), CAST(N'2019-11-10T22:23:32.433' AS DateTime), 1, NULL)
+GO
+INSERT [dbo].[devolucion] ([id], [monto], [fecha_devolucion], [estado], [estudiante_id]) VALUES (4, CAST(12.99 AS Decimal(9, 2)), CAST(N'2019-11-10T22:25:08.570' AS DateTime), 1, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[devolucion] OFF
+GO
+SET IDENTITY_INSERT [dbo].[especialidad] ON 
+GO
+INSERT [dbo].[especialidad] ([id], [nombre], [descripcion]) VALUES (1, N'Matematicas', N'Matematica basica de universidad')
+GO
+INSERT [dbo].[especialidad] ([id], [nombre], [descripcion]) VALUES (2, N'Calculo I', N'Calculo I de universidad')
+GO
+INSERT [dbo].[especialidad] ([id], [nombre], [descripcion]) VALUES (3, N'Lenguaje', N'Lenguaje de colegio secundaria')
+GO
+INSERT [dbo].[especialidad] ([id], [nombre], [descripcion]) VALUES (4, N'AUTOCAD', N'Programa informatico para ing civil')
+GO
+SET IDENTITY_INSERT [dbo].[especialidad] OFF
+GO
+SET IDENTITY_INSERT [dbo].[especialidad_tutor] ON 
+GO
+INSERT [dbo].[especialidad_tutor] ([id], [tutor_id], [especialidad_id]) VALUES (1, 1, 1)
+GO
+INSERT [dbo].[especialidad_tutor] ([id], [tutor_id], [especialidad_id]) VALUES (3, 2, 1)
+GO
+INSERT [dbo].[especialidad_tutor] ([id], [tutor_id], [especialidad_id]) VALUES (6, 3, 3)
+GO
+INSERT [dbo].[especialidad_tutor] ([id], [tutor_id], [especialidad_id]) VALUES (7, 4, 4)
+GO
+INSERT [dbo].[especialidad_tutor] ([id], [tutor_id], [especialidad_id]) VALUES (9, 5, 4)
+GO
+SET IDENTITY_INSERT [dbo].[especialidad_tutor] OFF
+GO
+SET IDENTITY_INSERT [dbo].[estudiante] ON 
+GO
+INSERT [dbo].[estudiante] ([id], [usuario_id], [estado], [servicios_contratados], [servicios_contratados_semanales], [descuento]) VALUES (1, 7, 1, NULL, NULL, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[estudiante] OFF
+GO
+SET IDENTITY_INSERT [dbo].[pago] ON 
+GO
+INSERT [dbo].[pago] ([id], [monto], [tipo_pago_id], [servicio_id], [estudiante_id]) VALUES (1, CAST(12.99 AS Decimal(6, 2)), NULL, 1, 1)
+GO
+SET IDENTITY_INSERT [dbo].[pago] OFF
+GO
+SET IDENTITY_INSERT [dbo].[queja] ON 
+GO
+INSERT [dbo].[queja] ([id], [fecha], [aprobada], [descripcion], [contrato_id]) VALUES (3, CAST(N'2019-11-10T17:34:31.377' AS DateTime), 1, N'queja 1', 2)
+GO
+SET IDENTITY_INSERT [dbo].[queja] OFF
+GO
+SET IDENTITY_INSERT [dbo].[servicio] ON 
+GO
+INSERT [dbo].[servicio] ([id], [nombre], [descripcion], [costo], [estado], [tutor_id], [especialidad_id]) VALUES (1, N'Matematicas en 1 semana', N'', CAST(12.99 AS Decimal(8, 2)), 1, 1, 1)
+GO
+INSERT [dbo].[servicio] ([id], [nombre], [descripcion], [costo], [estado], [tutor_id], [especialidad_id]) VALUES (2, N'Lenguajes de programacion', N'Aqui aprenderas muchos paradigmas de programacion', CAST(2.33 AS Decimal(8, 2)), 1, 2, 2)
+GO
+INSERT [dbo].[servicio] ([id], [nombre], [descripcion], [costo], [estado], [tutor_id], [especialidad_id]) VALUES (3, N'TDP', N'Aqui aprenderas a ser exclavo', CAST(2.33 AS Decimal(8, 2)), 1, 3, 3)
+GO
+INSERT [dbo].[servicio] ([id], [nombre], [descripcion], [costo], [estado], [tutor_id], [especialidad_id]) VALUES (4, N'SQL server', N'Aqui aprenderas todo sobre sql server ', CAST(2.33 AS Decimal(8, 2)), 0, 4, 4)
+GO
+INSERT [dbo].[servicio] ([id], [nombre], [descripcion], [costo], [estado], [tutor_id], [especialidad_id]) VALUES (6, N'Administracio de la informacion', N'Aqui aprenderas data mining', CAST(2.33 AS Decimal(8, 2)), 1, 5, 4)
+GO
+SET IDENTITY_INSERT [dbo].[servicio] OFF
+GO
+SET IDENTITY_INSERT [dbo].[tutor] ON 
+GO
+INSERT [dbo].[tutor] ([id], [usuario_id], [estado], [quejas_semanales], [quejas_totales], [comision]) VALUES (1, 8, 1, 1, 1, CAST(0.10 AS Decimal(6, 2)))
+GO
+INSERT [dbo].[tutor] ([id], [usuario_id], [estado], [quejas_semanales], [quejas_totales], [comision]) VALUES (2, 7, 1, 2, 2, CAST(0.10 AS Decimal(6, 2)))
+GO
+INSERT [dbo].[tutor] ([id], [usuario_id], [estado], [quejas_semanales], [quejas_totales], [comision]) VALUES (3, 11, 1, 1, 5, CAST(0.10 AS Decimal(6, 2)))
+GO
+INSERT [dbo].[tutor] ([id], [usuario_id], [estado], [quejas_semanales], [quejas_totales], [comision]) VALUES (4, 12, 1, 5, 10, CAST(0.10 AS Decimal(6, 2)))
+GO
+INSERT [dbo].[tutor] ([id], [usuario_id], [estado], [quejas_semanales], [quejas_totales], [comision]) VALUES (5, 13, 1, 0, 3, CAST(0.10 AS Decimal(6, 2)))
+GO
+SET IDENTITY_INSERT [dbo].[tutor] OFF
+GO
+SET IDENTITY_INSERT [dbo].[tutores_baneados] ON 
+GO
+INSERT [dbo].[tutores_baneados] ([id], [tutor_id], [fecha_quinta_queja], [estado]) VALUES (2, 1, CAST(N'2019-11-04T22:08:31.820' AS DateTime), 1)
+GO
+SET IDENTITY_INSERT [dbo].[tutores_baneados] OFF
+GO
+SET IDENTITY_INSERT [dbo].[usuario] ON 
+GO
+INSERT [dbo].[usuario] ([id], [nombres], [apellidos], [edad], [dni], [fecha_nacimiento], [genero], [direccion], [codigo_postal], [telefono], [celular], [usuario], [password], [correo], [ubigeo_id], [preferencia_id], [estado], [fecha_creacion]) VALUES (7, N'jose', N'veliz', 23, N'70631655', CAST(N'2012-02-21' AS Date), 1, N'Lote 23 SJL Mariscal', N'54458', N'4595524', N'995478452', N'', N'', N'', NULL, NULL, 1, CAST(N'2019-11-11T22:19:50.383' AS DateTime))
+GO
+INSERT [dbo].[usuario] ([id], [nombres], [apellidos], [edad], [dni], [fecha_nacimiento], [genero], [direccion], [codigo_postal], [telefono], [celular], [usuario], [password], [correo], [ubigeo_id], [preferencia_id], [estado], [fecha_creacion]) VALUES (8, N'carlos', N'perez', 23, N'70631655', CAST(N'2012-02-21' AS Date), 1, N'Fiscalia 265', N'12345', N'4594424', N'995475485', N'', N'', N'', NULL, NULL, 1, CAST(N'2019-11-11T22:20:20.400' AS DateTime))
+GO
+INSERT [dbo].[usuario] ([id], [nombres], [apellidos], [edad], [dni], [fecha_nacimiento], [genero], [direccion], [codigo_postal], [telefono], [celular], [usuario], [password], [correo], [ubigeo_id], [preferencia_id], [estado], [fecha_creacion]) VALUES (11, N'jonathan', N'salaverry', 24, N'45875121', CAST(N'1995-01-12' AS Date), 1, N'San borja sur', N'24510', N'1597536', N'995485632', N'usuario', N'password', N'jonathan_sa@gmail.com', NULL, NULL, 1, CAST(N'2019-11-11T22:12:29.720' AS DateTime))
+GO
+INSERT [dbo].[usuario] ([id], [nombres], [apellidos], [edad], [dni], [fecha_nacimiento], [genero], [direccion], [codigo_postal], [telefono], [celular], [usuario], [password], [correo], [ubigeo_id], [preferencia_id], [estado], [fecha_creacion]) VALUES (12, N'Graciela', N'Servantez', 24, N'51214896', CAST(N'1990-02-20' AS Date), 0, N'San borja norte', N'12522', N'1235454', N'994523658', N'usuario', N'password', N'gra_ser@gmail.com', NULL, NULL, 1, CAST(N'2019-11-11T22:15:03.500' AS DateTime))
+GO
+INSERT [dbo].[usuario] ([id], [nombres], [apellidos], [edad], [dni], [fecha_nacimiento], [genero], [direccion], [codigo_postal], [telefono], [celular], [usuario], [password], [correo], [ubigeo_id], [preferencia_id], [estado], [fecha_creacion]) VALUES (13, N'Freddie', N'Mercury', 65, N'12456598', CAST(N'1990-12-24' AS Date), 1, N'San juan miraflores', N'32555', N'8855224', N'99456582 ', N'usuario', N'password', N'freidie_rock@gmail.com', NULL, NULL, 1, CAST(N'2019-11-11T22:15:03.533' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[usuario] OFF
 GO
 ALTER TABLE [dbo].[calificacion] ADD  CONSTRAINT [DF_calificacion_calificacion_final]  DEFAULT ((0)) FOR [calificacion_final]
 GO
@@ -527,7 +657,7 @@ GO
 ALTER TABLE [dbo].[usuario]  WITH CHECK ADD FOREIGN KEY([ubigeo_id])
 REFERENCES [dbo].[ubigeo] ([id])
 GO
-/****** Object:  StoredProcedure [dbo].[SP_CambiarEstadoTutor]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_CambiarEstadoTutor]    Script Date: 11/11/2019 11:41:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -550,7 +680,7 @@ AS
 			update tutor set estado = 1 where id = @tutor_id
 		end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_CrearContrato]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_CrearContrato]    Script Date: 11/11/2019 11:41:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -561,7 +691,7 @@ create procedure [dbo].[SP_CrearContrato]
 as
 insert into contrato (estudiante_id,servicio_id,pago_realizado,fecha_pago_realizado) values (@estudiante_id,@servicio_id,1,GETDATE())
 GO
-/****** Object:  StoredProcedure [dbo].[SP_EncontrarMejorTutor]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_EncontrarMejorTutor]    Script Date: 11/11/2019 11:41:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -585,7 +715,7 @@ AS
 		end
 return 0
 GO
-/****** Object:  StoredProcedure [dbo].[SP_ReiniciarServiciosContratado]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_ReiniciarServiciosContratado]    Script Date: 11/11/2019 11:41:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -595,7 +725,7 @@ CREATE PROCEDURE [dbo].[SP_ReiniciarServiciosContratado]
 AS
     update estudiante set servicios_contratados_semanales = 0 where id = @estudiante_id
 GO
-/****** Object:  Trigger [dbo].[TR_ActualizarCalificacion]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Trigger [dbo].[TR_ActualizarCalificacion]    Script Date: 11/11/2019 11:41:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -631,7 +761,7 @@ CREATE TRIGGER [dbo].[TR_ActualizarCalificacion]
 GO
 ALTER TABLE [dbo].[contrato] ENABLE TRIGGER [TR_ActualizarCalificacion]
 GO
-/****** Object:  Trigger [dbo].[TR_VerificarContrato]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Trigger [dbo].[TR_VerificarContrato]    Script Date: 11/11/2019 11:41:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -672,7 +802,7 @@ CREATE TRIGGER [dbo].[TR_VerificarContrato]
 GO
 ALTER TABLE [dbo].[contrato] ENABLE TRIGGER [TR_VerificarContrato]
 GO
-/****** Object:  Trigger [dbo].[TR_VerificarEstudianteServicios]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Trigger [dbo].[TR_VerificarEstudianteServicios]    Script Date: 11/11/2019 11:41:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -695,7 +825,7 @@ CREATE TRIGGER [dbo].[TR_VerificarEstudianteServicios]
 GO
 ALTER TABLE [dbo].[estudiante] ENABLE TRIGGER [TR_VerificarEstudianteServicios]
 GO
-/****** Object:  Trigger [dbo].[TR_PagoInsertado]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Trigger [dbo].[TR_PagoInsertado]    Script Date: 11/11/2019 11:41:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -711,7 +841,7 @@ exec SP_CrearContrato @servicio_id,@estudiante_id
 GO
 ALTER TABLE [dbo].[pago] ENABLE TRIGGER [TR_PagoInsertado]
 GO
-/****** Object:  Trigger [dbo].[TR_AumentarQueja]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Trigger [dbo].[TR_AumentarQueja]    Script Date: 11/11/2019 11:41:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -741,7 +871,7 @@ CREATE TRIGGER [dbo].[TR_AumentarQueja]
 GO
 ALTER TABLE [dbo].[queja] ENABLE TRIGGER [TR_AumentarQueja]
 GO
-/****** Object:  Trigger [dbo].[TR_CrearCalificacion]    Script Date: 11/11/2019 1:03:36 PM ******/
+/****** Object:  Trigger [dbo].[TR_CrearCalificacion]    Script Date: 11/11/2019 11:41:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -759,7 +889,7 @@ CREATE TRIGGER [dbo].[TR_CrearCalificacion]
 GO
 ALTER TABLE [dbo].[servicio] ENABLE TRIGGER [TR_CrearCalificacion]
 GO
-/****** Object:  Trigger [dbo].[TR_TutorBaneado]    Script Date: 11/11/2019 1:03:37 PM ******/
+/****** Object:  Trigger [dbo].[TR_TutorBaneado]    Script Date: 11/11/2019 11:41:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -779,7 +909,7 @@ if @quejas_semanales >= 5
 GO
 ALTER TABLE [dbo].[tutor] ENABLE TRIGGER [TR_TutorBaneado]
 GO
-/****** Object:  Trigger [dbo].[TR_CrearUsuarioSinComision]    Script Date: 11/11/2019 1:03:37 PM ******/
+/****** Object:  Trigger [dbo].[TR_CrearUsuarioSinComision]    Script Date: 11/11/2019 11:41:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
