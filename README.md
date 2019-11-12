@@ -11,16 +11,17 @@
   * [x] Actualizar foto de modelo lógico
 
 * Tipo de datos
-  * [ ] Añadir reglas
+  * [x] Añadir reglas
 
 * Triggers, store procedures y functions
   * [x] Definir en base a reglas de negocio
   * [ ] Definir funciones
+  * [ ] Definir vistas
 
 * Tablas Particiones
   * [x] Añadir mas filegroups para contratos y organizarlos por fecha
   * [ ] Crear las particiones
-  * [ ] Falta crear indice en la base de datos
+  * [ ] Falta crear indices en la base de datos (las tablas mas consultadas seran mensajes, contrato,por ahora )
 
 * XML 
   * [x] Crear reportes de tutores
