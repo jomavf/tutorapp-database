@@ -20,7 +20,7 @@
 
 * Tablas Particiones
   * [x] Añadir mas filegroups para contratos y organizarlos por fecha
-  * [ ] Crear las particiones
+  * [x] Crear las particiones
   * [ ] Falta crear indices en la base de datos (las tablas mas consultadas seran mensajes, contrato,por ahora )
 
 * XML 
@@ -28,7 +28,7 @@
   * [ ] Pensar en alguno mas (opcional)
  
 * Reportes
-  * [ ] 3 o 4.
+  * [x] 3 o 4.
   
 * [X] Backups
 
