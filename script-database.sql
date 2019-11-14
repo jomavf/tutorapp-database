@@ -244,6 +244,9 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [TutorApp_Contratos]
 ) ON [TutorApp_Contratos]
 GO
+CREATE NONCLUSTERED INDEX IX_Contrato_FechaInicio
+    ON contrato (id, fecha_inicio)
+GO
 /****** Object:  Table [dbo].[devolucion]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
