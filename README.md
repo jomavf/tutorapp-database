@@ -11,15 +11,15 @@
   * [x] Actualizar foto de modelo lógico
 
 * Tipo de datos
-  * [ ] Añadir reglas
+  * [x] Añadir reglas
 
 * Triggers, store procedures y functions
   * [x] Definir en base a reglas de negocio
-  * [ ] Definir funciones
+  * [x] Definir funciones
 
 * Tablas Particiones
   * [x] Añadir mas filegroups para contratos y organizarlos por fecha
-  * [ ] Crear las particiones
+  * [x] Crear las particiones
   * [ ] Falta crear indice en la base de datos
 
 * XML 
@@ -27,12 +27,12 @@
   * [ ] Pensar en alguno mas (opcional)
  
 * Reportes
-  * [ ] 3 o 4.
+  * [x] 3 o 4.
   
 * [X] Backups
 
-* [ ] Conclusiones
-* [ ] Recomendaciones
+* [x] Conclusiones
+* [x] Recomendaciones
 
 * *PRIORIDAD BAJA*
 

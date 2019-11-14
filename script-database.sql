@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [TutorApp]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  Database [TutorApp]    Script Date: 11/14/2019 1:07:02 AM ******/
 CREATE DATABASE [TutorApp]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -85,13 +85,61 @@ ALTER DATABASE [TutorApp] SET QUERY_STORE = OFF
 GO
 USE [TutorApp]
 GO
-/****** Object:  UserDefinedDataType [dbo].[cel]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  UserDefinedDataType [dbo].[cel]    Script Date: 11/14/2019 1:07:02 AM ******/
 CREATE TYPE [dbo].[cel] FROM [char](9) NULL
 GO
-/****** Object:  UserDefinedDataType [dbo].[dni]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  UserDefinedDataType [dbo].[dni]    Script Date: 11/14/2019 1:07:02 AM ******/
 CREATE TYPE [dbo].[dni] FROM [char](8) NULL
 GO
-/****** Object:  Table [dbo].[calificacion]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[HallarPromedioCalificacionServicio]    Script Date: 11/14/2019 1:07:02 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE FUNCTION [dbo].[HallarPromedioCalificacionServicio]
+(
+    @servicio_id int
+)
+RETURNS INT
+AS
+BEGIN
+	declare @suma decimal(6,2)
+	select @suma = sum(c.calificacion) from contrato c where servicio_id = 1 and estado = 1
+
+	declare @cantidad decimal(6,2)
+	select @cantidad = count(*) from contrato where servicio_id = 1 and estado = 1 
+
+    RETURN @suma/@cantidad
+END
+GO
+/****** Object:  Table [dbo].[queja]    Script Date: 11/14/2019 1:07:02 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[queja](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[fecha] [datetime] NULL,
+	[aprobada] [bit] NULL,
+	[descripcion] [varchar](500) NULL,
+	[contrato_id] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[VW_QuejasAprobadas]    Script Date: 11/14/2019 1:07:02 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[VW_QuejasAprobadas] AS
+SELECT *
+FROM queja 
+WHERE aprobada = 1
+GO
+/****** Object:  Table [dbo].[calificacion]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -107,7 +155,55 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[comentario]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  Table [dbo].[tutor]    Script Date: 11/14/2019 1:07:02 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tutor](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[usuario_id] [int] NULL,
+	[estado] [bit] NULL,
+	[quejas_semanales] [tinyint] NULL,
+	[quejas_totales] [int] NULL,
+	[comision] [decimal](6, 2) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[servicio]    Script Date: 11/14/2019 1:07:02 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[servicio](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[nombre] [varchar](50) NULL,
+	[descripcion] [varchar](200) NULL,
+	[costo] [decimal](8, 2) NULL,
+	[estado] [bit] NULL,
+	[tutor_id] [int] NULL,
+	[especialidad_id] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[VW_CalificacionDeProfesores]    Script Date: 11/14/2019 1:07:02 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[VW_CalificacionDeProfesores] AS
+SELECT s.tutor_id,c.calificacion_final 
+FROM calificacion c join servicio s 
+ON c.servicio_id = s.id join tutor t 
+ON s.tutor_id = t.id
+GO
+/****** Object:  Table [dbo].[comentario]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -123,7 +219,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[contrato]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  Table [dbo].[contrato]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -148,7 +244,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [TutorApp_Contratos]
 ) ON [TutorApp_Contratos]
 GO
-/****** Object:  Table [dbo].[devolucion]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  Table [dbo].[devolucion]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -165,7 +261,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dia]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  Table [dbo].[dia]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -182,7 +278,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[especialidad]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  Table [dbo].[especialidad]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -197,7 +293,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[especialidad_tutor]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  Table [dbo].[especialidad_tutor]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -212,7 +308,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[estudiante]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  Table [dbo].[estudiante]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -230,7 +326,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[horario]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  Table [dbo].[horario]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -244,7 +340,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[mensaje]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  Table [dbo].[mensaje]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -263,7 +359,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [TutorApp_Contratos]
 ) ON [TutorApp_Contratos]
 GO
-/****** Object:  Table [dbo].[pago]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  Table [dbo].[pago]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -280,7 +376,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[preferencia]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  Table [dbo].[preferencia]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -295,43 +391,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[queja]    Script Date: 11/11/2019 11:41:25 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[queja](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[fecha] [datetime] NULL,
-	[aprobada] [bit] NULL,
-	[descripcion] [varchar](500) NULL,
-	[contrato_id] [int] NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[servicio]    Script Date: 11/11/2019 11:41:25 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[servicio](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[nombre] [varchar](50) NULL,
-	[descripcion] [varchar](200) NULL,
-	[costo] [decimal](8, 2) NULL,
-	[estado] [bit] NULL,
-	[tutor_id] [int] NULL,
-	[especialidad_id] [int] NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[tipo_pago]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  Table [dbo].[tipo_pago]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -346,25 +406,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tutor]    Script Date: 11/11/2019 11:41:25 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[tutor](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[usuario_id] [int] NULL,
-	[estado] [bit] NULL,
-	[quejas_semanales] [tinyint] NULL,
-	[quejas_totales] [int] NULL,
-	[comision] [decimal](6, 2) NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[tutores_baneados]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  Table [dbo].[tutores_baneados]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -380,7 +422,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ubigeo]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  Table [dbo].[ubigeo]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -397,7 +439,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[usuario]    Script Date: 11/11/2019 11:41:25 PM ******/
+/****** Object:  Table [dbo].[usuario]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -657,7 +699,7 @@ GO
 ALTER TABLE [dbo].[usuario]  WITH CHECK ADD FOREIGN KEY([ubigeo_id])
 REFERENCES [dbo].[ubigeo] ([id])
 GO
-/****** Object:  StoredProcedure [dbo].[SP_CambiarEstadoTutor]    Script Date: 11/11/2019 11:41:26 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_CambiarEstadoTutor]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -680,7 +722,7 @@ AS
 			update tutor set estado = 1 where id = @tutor_id
 		end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_CrearContrato]    Script Date: 11/11/2019 11:41:26 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_CrearContrato]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -691,7 +733,7 @@ create procedure [dbo].[SP_CrearContrato]
 as
 insert into contrato (estudiante_id,servicio_id,pago_realizado,fecha_pago_realizado) values (@estudiante_id,@servicio_id,1,GETDATE())
 GO
-/****** Object:  StoredProcedure [dbo].[SP_EncontrarMejorTutor]    Script Date: 11/11/2019 11:41:26 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_EncontrarMejorTutor]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -715,7 +757,7 @@ AS
 		end
 return 0
 GO
-/****** Object:  StoredProcedure [dbo].[SP_ReiniciarServiciosContratado]    Script Date: 11/11/2019 11:41:26 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_ReiniciarServiciosContratado]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -725,7 +767,7 @@ CREATE PROCEDURE [dbo].[SP_ReiniciarServiciosContratado]
 AS
     update estudiante set servicios_contratados_semanales = 0 where id = @estudiante_id
 GO
-/****** Object:  Trigger [dbo].[TR_ActualizarCalificacion]    Script Date: 11/11/2019 11:41:26 PM ******/
+/****** Object:  Trigger [dbo].[TR_ActualizarCalificacion]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -761,7 +803,7 @@ CREATE TRIGGER [dbo].[TR_ActualizarCalificacion]
 GO
 ALTER TABLE [dbo].[contrato] ENABLE TRIGGER [TR_ActualizarCalificacion]
 GO
-/****** Object:  Trigger [dbo].[TR_VerificarContrato]    Script Date: 11/11/2019 11:41:26 PM ******/
+/****** Object:  Trigger [dbo].[TR_VerificarContrato]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -802,7 +844,7 @@ CREATE TRIGGER [dbo].[TR_VerificarContrato]
 GO
 ALTER TABLE [dbo].[contrato] ENABLE TRIGGER [TR_VerificarContrato]
 GO
-/****** Object:  Trigger [dbo].[TR_VerificarEstudianteServicios]    Script Date: 11/11/2019 11:41:26 PM ******/
+/****** Object:  Trigger [dbo].[TR_VerificarEstudianteServicios]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -825,7 +867,7 @@ CREATE TRIGGER [dbo].[TR_VerificarEstudianteServicios]
 GO
 ALTER TABLE [dbo].[estudiante] ENABLE TRIGGER [TR_VerificarEstudianteServicios]
 GO
-/****** Object:  Trigger [dbo].[TR_PagoInsertado]    Script Date: 11/11/2019 11:41:26 PM ******/
+/****** Object:  Trigger [dbo].[TR_PagoInsertado]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -841,7 +883,7 @@ exec SP_CrearContrato @servicio_id,@estudiante_id
 GO
 ALTER TABLE [dbo].[pago] ENABLE TRIGGER [TR_PagoInsertado]
 GO
-/****** Object:  Trigger [dbo].[TR_AumentarQueja]    Script Date: 11/11/2019 11:41:26 PM ******/
+/****** Object:  Trigger [dbo].[TR_AumentarQueja]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -871,7 +913,7 @@ CREATE TRIGGER [dbo].[TR_AumentarQueja]
 GO
 ALTER TABLE [dbo].[queja] ENABLE TRIGGER [TR_AumentarQueja]
 GO
-/****** Object:  Trigger [dbo].[TR_CrearCalificacion]    Script Date: 11/11/2019 11:41:26 PM ******/
+/****** Object:  Trigger [dbo].[TR_CrearCalificacion]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -889,7 +931,7 @@ CREATE TRIGGER [dbo].[TR_CrearCalificacion]
 GO
 ALTER TABLE [dbo].[servicio] ENABLE TRIGGER [TR_CrearCalificacion]
 GO
-/****** Object:  Trigger [dbo].[TR_TutorBaneado]    Script Date: 11/11/2019 11:41:26 PM ******/
+/****** Object:  Trigger [dbo].[TR_TutorBaneado]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -909,7 +951,7 @@ if @quejas_semanales >= 5
 GO
 ALTER TABLE [dbo].[tutor] ENABLE TRIGGER [TR_TutorBaneado]
 GO
-/****** Object:  Trigger [dbo].[TR_CrearUsuarioSinComision]    Script Date: 11/11/2019 11:41:26 PM ******/
+/****** Object:  Trigger [dbo].[TR_CrearUsuarioSinComision]    Script Date: 11/14/2019 1:07:02 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
